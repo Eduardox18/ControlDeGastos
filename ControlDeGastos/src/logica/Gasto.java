@@ -45,6 +45,7 @@ public class Gasto implements GastoDAO{
     @Override
     public ObservableList<Gasto> consultarGasto(LocalDate fecha) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
