@@ -5,13 +5,15 @@
  */
 package logica;
 
+import datos.GastoDAO;
 import java.time.LocalDate;
+import javafx.collections.ObservableList;
 
 /**
  *
  * @author lalo
  */
-public class Gasto {
+public class Gasto implements GastoDAO{
     private LocalDate fecha;
     private Double gasto;
     private String descripcion;
@@ -38,5 +40,15 @@ public class Gasto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    @Override
+    public ObservableList<Gasto> consultarGasto(LocalDate fecha) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean agregarGasto(double Gasto, LocalDate fecha, String descripcion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
