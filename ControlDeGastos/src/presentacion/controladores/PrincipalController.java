@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controldegastos.presentacion.controladores;
+package presentacion.controladores;
 
 import java.net.URL;
 import java.util.ResourceBundle;
