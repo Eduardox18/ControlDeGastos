@@ -46,21 +46,18 @@ public class Gasto implements GastoDAO{
 
     @Override
     public ObservableList<Gasto> consultarGasto(LocalDate fecha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public ObservableList<Gasto> consultarGasto(Date fecha) {
         Connection conexion = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
         Gasto gastoResultado;
+        Date fechaSQL = Date.valueOf(fecha);
         ObservableList<Gasto> listaGastos = FXCollections.observableArrayList();
         
         try {
             conexion = new Conexion().connection();
             String consulta = "SELECT gasto, descripcion FROM Gasto WHERE fecha = ?";
             sentencia = conexion.prepareStatement(consulta);
-            sentencia.setDate(1, fecha);
+            sentencia.setDate(1, fechaSQL);
             rs = sentencia.executeQuery();
             
             while(rs.next()) {

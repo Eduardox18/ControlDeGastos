@@ -6,6 +6,8 @@
 package presentacion.controladores;
 
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import logica.Gasto;
 
 /**
  * FXML Controller class
@@ -55,14 +58,28 @@ public class PrincipalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        fechaConsultar.valueProperty().addListener((ov, oldValue, newValue) -> {
+            llenarTabla();
+        });
     }    
     
-    private int llenarTabla() {
+    private void llenarTabla() {
+        Gasto gasto = new Gasto();
         columnaGasto.setCellValueFactory(new PropertyValueFactory<>("gasto"));
         columnaDescripcion.setCellFactory(new PropertyValueFactory<>("descripcion"));
         
-   
+        LocalDate fecha;
+        Date fechaSQL;
+        try{
+            tablaGastos.setItems(gasto.consultarGasto(fechaConsultar.getValue()));
+        } catch(NullPointerException e) {
+            //se va a lanzar diálogo
+        }
+    }
+    
+    private void botonGuardar () {
+        Gasto gasto = new Gasto();
+        
     }
     
 }
