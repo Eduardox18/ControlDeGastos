@@ -101,21 +101,35 @@ public class Gasto implements GastoDAO{
     public boolean agregarGasto(Gasto gasto) {
         Connection conexion = null;
         PreparedStatement sentencia = null;
+        Date fechaSQL = Date.valueOf(gasto.getFecha());
         
         try {
         conexion = new Conexion().connection();
         String nuevoGasto = "INSERT INTO Gasto (fecha, gasto, descripcion) VALUES (?, ?, ?)";
         sentencia = conexion.prepareStatement(nuevoGasto);
-        sentencia.setDate(1, gasto.getFecha());
+        sentencia.setDate(1, fechaSQL);
         sentencia.setDouble(2, gasto.getGasto());
-        sentencia.setString(3, gasto.getSring);
+        sentencia.setString(3, gasto.getDescripcion());
         
         sentencia.executeUpdate();
         return true;
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             //ERROR
+        } finally {
+            if (sentencia != null) {
+                try {
+                    sentencia.close();
+                } catch (SQLException ex) {
+                    //DIALOGO CERRAR CONEXION
+                }
             }
-        
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException ex) {
+                    //DIALOGO CERRAR CONEXION
+                }
+            }
     }
         return false;
     }
