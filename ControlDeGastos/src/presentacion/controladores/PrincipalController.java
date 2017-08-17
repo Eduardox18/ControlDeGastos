@@ -16,6 +16,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -41,7 +42,7 @@ public class PrincipalController implements Initializable {
     @FXML
     private TableColumn columnaGasto;
     @FXML
-    private TableColumn collumnaDescripcion;
+    private TableColumn columnaDescripcion;
     @FXML
     private Label etiquetaGranTotal;
     @FXML
@@ -54,7 +55,14 @@ public class PrincipalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
+    
+    private int llenarTabla() {
+        columnaGasto.setCellValueFactory(new PropertyValueFactory<>("gasto"));
+        columnaDescripcion.setCellFactory(new PropertyValueFactory<>("descripcion"));
+        
+   
+    }
     
 }
