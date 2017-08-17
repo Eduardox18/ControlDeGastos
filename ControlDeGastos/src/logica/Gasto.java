@@ -130,4 +130,15 @@ public class Gasto implements GastoDAO{
     }
         return false;
     }
+    
+    public Double sumatoria (LocalDate fecha) {
+        ObservableList<Gasto> gastos = consultarGasto(fecha);
+        Double resultado = 0.0;
+        
+        for(int i = 0; i < gastos.size(); i++){
+            resultado += gastos.get(i).getGasto();
+        }
+        
+        return resultado;
+    }
 }
