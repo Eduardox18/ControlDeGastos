@@ -8,5 +8,5 @@ public interface GastoDAO {
     
     public ObservableList<Gasto> consultarGasto(LocalDate fecha);
     public boolean agregarGasto(double Gasto, LocalDate fecha, String descripcion);
-    
+        
 }

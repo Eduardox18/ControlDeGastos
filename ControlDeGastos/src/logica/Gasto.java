@@ -44,12 +44,11 @@ public class Gasto implements GastoDAO{
         this.descripcion = descripcion;
     }
 
-<<<<<<< Updated upstream
     @Override
     public ObservableList<Gasto> consultarGasto(LocalDate fecha) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-=======
+    }
+    
     public ObservableList<Gasto> consultarGasto(Date fecha) {
         Connection conexion = null;
         PreparedStatement sentencia = null;
@@ -97,11 +96,27 @@ public class Gasto implements GastoDAO{
             }
         }
         return listaGastos;
->>>>>>> Stashed changes
     }
     
-    public boolean agregarGasto(double Gasto, LocalDate fecha, String descripcion) {
-        //POPIS
+    public boolean agregarGasto(Gasto gasto) {
+        Connection conexion = null;
+        PreparedStatement sentencia = null;
+        
+        try {
+        conexion = new Conexion().connection();
+        String nuevoGasto = "INSERT INTO Gasto (fecha, gasto, descripcion) VALUES (?, ?, ?)";
+        sentencia = conexion.prepareStatement(nuevoGasto);
+        sentencia.setDate(1, gasto.getFecha());
+        sentencia.setDouble(2, gasto.getGasto());
+        sentencia.setString(3, gasto.getSring);
+        
+        sentencia.executeUpdate();
+        return true;
+        catch (SQLException ex) {
+            //ERROR
+            }
+        
+    }
         return false;
     }
 }
