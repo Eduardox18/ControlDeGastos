@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -37,6 +38,10 @@ public class PrincipalController implements Initializable {
     private TextField descripcionAgregar;
     @FXML
     private TableView tablaGastos;
+    @FXML
+    private TableColumn columnaGasto;
+    @FXML
+    private TableColumn collumnaDescripcion;
     @FXML
     private Label etiquetaGranTotal;
     @FXML
