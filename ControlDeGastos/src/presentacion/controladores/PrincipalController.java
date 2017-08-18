@@ -22,7 +22,8 @@ import presentacion.Dialogo;
 
 /**
  * FXML Controller class
- *
+ * Clase contenedora de los métodos utilizados para interactuar con los elementos
+ * de la interfaz
  * @author José Andrés Domínguez González
  */
 public class PrincipalController implements Initializable {
@@ -60,11 +61,11 @@ public class PrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Gasto gasto = new Gasto();
-        granTotal.setText("0.00");
+        granTotal.setText("$ 0.00");
         
         fechaConsultar.valueProperty().addListener((ov, oldValue, newValue) -> {
             llenarTabla();
-            granTotal.setText(gasto.sumarTotal(tablaGastos.getItems()));
+            granTotal.setText("$ " + gasto.sumarTotal(tablaGastos.getItems()));
         });
         
         Pattern patternDobles = Pattern.compile("\\d*|\\d+\\.\\d*");
@@ -75,6 +76,10 @@ public class PrincipalController implements Initializable {
         gastoAgregar.setTextFormatter(formatoDoble);
     }    
     
+    /**
+     * 
+     * Método encargado de llenar de elementos el tableView
+     */
     private void llenarTabla() {
         Gasto gasto = new Gasto();
         columnaGasto.setCellValueFactory(new PropertyValueFactory<>("gasto"));
@@ -91,6 +96,10 @@ public class PrincipalController implements Initializable {
         }
     }
     
+    /**
+     * 
+     * Método encargado de guardar los datos recuperados en la base de datos
+     */
     @FXML
     public void guardarGasto () {
         Gasto gasto = new Gasto();
@@ -126,6 +135,10 @@ public class PrincipalController implements Initializable {
         }
     }
     
+    /**
+     * 
+     * Método que limpia los campos de texto, se utiliza después del botón guardar
+     */
     public void limpiarCampos() {
         gastoAgregar.setText("");
         descripcionAgregar.setText("");
