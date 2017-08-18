@@ -16,15 +16,15 @@ import javafx.collections.ObservableList;
  * @author lalo
  */
 public class Gasto implements GastoDAO{
-    private LocalDate fecha;
+    private Date fecha;
     private Double gasto;
     private String descripcion;
 
-    public LocalDate getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -45,19 +45,18 @@ public class Gasto implements GastoDAO{
     }
 
     @Override
-    public ObservableList<Gasto> consultarGasto(LocalDate fecha) {
+    public ObservableList<Gasto> consultarGasto(Date fecha) {
         Connection conexion = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
         Gasto gastoResultado;
-        Date fechaSQL = Date.valueOf(fecha);
         ObservableList<Gasto> listaGastos = FXCollections.observableArrayList();
         
         try {
             conexion = new Conexion().connection();
             String consulta = "SELECT gasto, descripcion FROM Gasto WHERE fecha = ?";
             sentencia = conexion.prepareStatement(consulta);
-            sentencia.setDate(1, fechaSQL);
+            sentencia.setDate(1, fecha);
             rs = sentencia.executeQuery();
             
             while(rs.next()) {
@@ -95,23 +94,23 @@ public class Gasto implements GastoDAO{
         return listaGastos;
     }
     
+    @Override
     public boolean agregarGasto(Gasto gasto) {
         Connection conexion = null;
         PreparedStatement sentencia = null;
-        Date fechaSQL = Date.valueOf(gasto.getFecha());
         
         try {
         conexion = new Conexion().connection();
         String nuevoGasto = "INSERT INTO Gasto (fecha, gasto, descripcion) VALUES (?, ?, ?)";
         sentencia = conexion.prepareStatement(nuevoGasto);
-        sentencia.setDate(1, fechaSQL);
+        sentencia.setDate(1, gasto.getFecha());
         sentencia.setDouble(2, gasto.getGasto());
         sentencia.setString(3, gasto.getDescripcion());
         
         sentencia.executeUpdate();
         return true;
         } catch (SQLException ex) {
-            //ERROR
+            System.out.println("Error");
         } finally {
             if (sentencia != null) {
                 try {

@@ -5,12 +5,13 @@
  */
 package presentacion;
 
+import java.io.IOException;
+import java.net.URL;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -19,24 +20,24 @@ import javafx.stage.Stage;
  */
 public class ControlDeGastos extends Application {
     
+    private static BorderPane root = new BorderPane();
+    
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        AnchorPane panePrincipal = null;
         
-        Scene scene = new Scene(root, 300, 250);
+        URL principal = getClass().getResource("/presentacion/Principal.fxml");
+        try {
+            panePrincipal = FXMLLoader.load(principal);
+        } catch (IOException e) {
+            //Error
+        }
         
-        primaryStage.setTitle("Hello World!");
+        root.setCenter(panePrincipal);
+        
+        Scene scene = new Scene(root, 410, 334);
+        primaryStage.setTitle("Control de gastos");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

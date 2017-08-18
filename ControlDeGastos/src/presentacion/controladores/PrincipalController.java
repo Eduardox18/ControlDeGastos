@@ -71,15 +71,38 @@ public class PrincipalController implements Initializable {
         LocalDate fecha;
         Date fechaSQL;
         try{
-            tablaGastos.setItems(gasto.consultarGasto(fechaConsultar.getValue()));
+            //tablaGastos.setItems(gasto.consultarGasto(fechaConsultar.getValue()));
         } catch(NullPointerException e) {
             //se va a lanzar diálogo
         }
     }
     
-    private void botonGuardar () {
+    @FXML
+    public void guardarGasto () {
         Gasto gasto = new Gasto();
         
+        try {
+            if (gastoAgregar.getText().trim().isEmpty()) {
+                throw new NullPointerException();
+            }
+            if (descripcionAgregar.getText().trim().isEmpty()) {
+                throw new NullPointerException();
+            }
+            if (fechaAgregar.getValue().isAfter(LocalDate.now())) {
+                throw new LinkageError();
+            }
+            
+            Date fechaSQL = Date.valueOf(fechaAgregar.getValue());
+            gasto.setGasto(Double.valueOf(gastoAgregar.getText()));
+            gasto.setDescripcion(descripcionAgregar.getText());
+            gasto.setFecha(fechaSQL);
+            boolean flag = gasto.agregarGasto(gasto);
+            System.out.println(flag);
+        } catch (NullPointerException e) {
+            System.out.println("2");
+        } catch (LinkageError ed) {
+            System.out.println("1");
+        }
     }
     
 }
