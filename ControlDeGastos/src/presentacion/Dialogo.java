@@ -13,6 +13,10 @@ import javafx.scene.control.Alert;
  */
 public class Dialogo {
     
+    /**
+     * 
+     * Método que muestra un diálogo cuando hay campos que falten por llenar
+     */
     public void alertaCamposVacios() {
         Alert alertaCampos = new Alert(Alert.AlertType.WARNING);
         alertaCampos.setTitle("Campos incompletos");
@@ -21,6 +25,11 @@ public class Dialogo {
         alertaCampos.showAndWait();
     }
     
+    /**
+     * 
+     * Este método muestra un diálogo cuando se trata de seleccionar una fecha 
+     * que aun no llega
+     */
     public void alertarFechaFutura() {
         Alert alertaUsuario = new Alert(Alert.AlertType.WARNING);
         alertaUsuario.setTitle("Fecha erronea");
@@ -29,6 +38,10 @@ public class Dialogo {
         alertaUsuario.showAndWait();
     }
     
+    /**
+     * 
+     * Método que muestra un diálogo cuando se produce algún error
+     */
     public void alertaError() {
         Alert alertaUsuario = new Alert(Alert.AlertType.ERROR);
         alertaUsuario.setTitle("Error");
@@ -38,6 +51,11 @@ public class Dialogo {
         alertaUsuario.showAndWait();
     }
     
+    /**
+     * 
+     * Método que muestra un diálogo indicando que la operación se realizó de
+     * manera exitosa
+     */
     public void alertaExito() {
         Alert alertaUsuario = new Alert(Alert.AlertType.INFORMATION);
         alertaUsuario.setTitle("Éxito");
