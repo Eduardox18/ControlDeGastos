@@ -19,21 +19,28 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-
+/**
+ * Clase principal que permite ejecutar la ventana principal del programa.
+ */
 public class ControlDeGastos extends Application {
     
     private static BorderPane root = new BorderPane();
     
+    /**
+     * Función que ejecuta la ventana principal del sistema y define todos sus atributos.
+     * @param primaryStage 
+     */
     @Override
     public void start(Stage primaryStage) {
         
         AnchorPane panePrincipal = null;
+        Dialogo dialogo = new Dialogo();
         
         URL principal = getClass().getResource("/presentacion/Principal.fxml");
         try {
             panePrincipal = FXMLLoader.load(principal);
         } catch (IOException e) {
-            //Error
+            dialogo.alertaError();
         }
         
         root.setCenter(panePrincipal);
@@ -45,7 +52,7 @@ public class ControlDeGastos extends Application {
     }
 
     /**
-     * @param args the command line arguments
+     * Función main del programa.
      */
     public static void main(String[] args) {
         launch(args);
