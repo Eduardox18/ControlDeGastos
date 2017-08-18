@@ -18,10 +18,10 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="464.0">
                      <children>
-                        <DatePicker fx:id="fechaAgregar" layoutX="95.0" layoutY="53.0" prefHeight="27.0" prefWidth="217.0" promptText="Fecha" />
-                        <TextField fx:id="gastoAgregar" layoutX="98.0" layoutY="110.0" prefHeight="27.0" prefWidth="215.0" promptText="Gasto" />
-                        <TextField fx:id="descripcionAgregar" layoutX="98.0" layoutY="163.0" prefHeight="27.0" prefWidth="215.0" promptText="Descripción" />
-                        <Button fx:id="botonGuardar" layoutX="171.0" layoutY="241.0" mnemonicParsing="false" onAction="#guardarGasto" text="Guardar" />
+                        <DatePicker fx:id="fechaAgregar" layoutX="95.0" layoutY="53.0" prefHeight="27.0" prefWidth="217.0" promptText="Fecha" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="98.0" />
+                        <TextField fx:id="gastoAgregar" layoutX="98.0" layoutY="110.0" prefHeight="27.0" prefWidth="215.0" promptText="Gasto" AnchorPane.leftAnchor="98.0" AnchorPane.rightAnchor="97.0" />
+                        <TextField fx:id="descripcionAgregar" layoutX="98.0" layoutY="163.0" prefHeight="27.0" prefWidth="215.0" promptText="Descripción" AnchorPane.leftAnchor="98.0" AnchorPane.rightAnchor="97.0" />
+                        <Button fx:id="botonGuardar" layoutX="171.0" layoutY="241.0" mnemonicParsing="false" onAction="#guardarGasto" text="Guardar" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="171.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -30,7 +30,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <DatePicker fx:id="fechaConsultar" layoutX="16.0" layoutY="14.0" prefHeight="27.0" prefWidth="214.0" promptText="Fecha" />
+                        <DatePicker fx:id="fechaConsultar" layoutX="16.0" layoutY="14.0" prefHeight="27.0" prefWidth="214.0" promptText="Fecha" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="180.0" />
                         <Label fx:id="etiquetaGranTotal" layoutX="264.0" layoutY="270.0" text="Total:" />
                         <Label fx:id="granTotal" layoutX="328.0" layoutY="270.0" text="\$$$$$" />
                         <TableView fx:id="tablaGastos" layoutX="16.0" layoutY="57.0" prefHeight="200.0" prefWidth="377.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="57.0">
