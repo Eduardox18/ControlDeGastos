@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
 
 import javafx.scene.control.Alert;
 
 /**
- *
- * @author José Andrés Domínguez González
+ * Clase que contiene las alertas que se utilizan en el programa, para mostrar información al usuario.
  */
 public class Dialogo {
     
     /**
-     * 
-     * Método que muestra un diálogo cuando hay campos que falten por llenar
+     * Método que muestra un diálogo con información sobre campos faltantes por llenar.
      */
     public void alertaCamposVacios() {
         Alert alertaCampos = new Alert(Alert.AlertType.WARNING);
@@ -26,7 +19,6 @@ public class Dialogo {
     }
     
     /**
-     * 
      * Este método muestra un diálogo cuando se trata de seleccionar una fecha 
      * que aun no llega
      */
@@ -39,8 +31,7 @@ public class Dialogo {
     }
     
     /**
-     * 
-     * Método que muestra un diálogo cuando se produce algún error
+     * Método que muestra un diálogo cuando se produce algún error.
      */
     public void alertaError() {
         Alert alertaUsuario = new Alert(Alert.AlertType.ERROR);
@@ -52,7 +43,6 @@ public class Dialogo {
     }
     
     /**
-     * 
      * Método que muestra un diálogo indicando que la operación se realizó de
      * manera exitosa
      */

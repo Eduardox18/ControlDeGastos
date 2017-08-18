@@ -21,10 +21,8 @@ import logica.Gasto;
 import presentacion.Dialogo;
 
 /**
- * FXML Controller class
  * Clase contenedora de los métodos utilizados para interactuar con los elementos
  * de la interfaz
- * @author José Andrés Domínguez González
  */
 public class PrincipalController implements Initializable {
 
@@ -56,7 +54,8 @@ public class PrincipalController implements Initializable {
     Dialogo dialogo = new Dialogo();
     
     /**
-     * Initializes the controller class.
+     * Inicializador principal de la clase. Contiene la inicialización de los componentes y para
+     * validar el campo "gasto".
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -77,8 +76,8 @@ public class PrincipalController implements Initializable {
     }    
     
     /**
-     * 
-     * Método encargado de llenar de elementos el tableView
+     * Método encargado de completar la tabla mostrada en la interfaz a partir de una ObservableList
+     * recuperada con un método de la clase Gasto.
      */
     private void llenarTabla() {
         Gasto gasto = new Gasto();
@@ -97,8 +96,7 @@ public class PrincipalController implements Initializable {
     }
     
     /**
-     * 
-     * Método encargado de guardar los datos recuperados en la base de datos
+     * Método encargado de guardar los datos recuperados en la base de datos.
      */
     @FXML
     public void guardarGasto () {
@@ -108,7 +106,7 @@ public class PrincipalController implements Initializable {
             if (gastoAgregar.getText().trim().isEmpty()) {
                 throw new NullPointerException();
             }
-            if (descripcionAgregar.getText().trim().isEmpty()) {
+            if (descripcionAgregar.getText().trim().isEmpty() || descripcionAgregar.getText().equalsIgnoreCase("'")) {
                 throw new NullPointerException();
             }
             if (fechaAgregar.getValue().isAfter(LocalDate.now())) {
@@ -136,8 +134,8 @@ public class PrincipalController implements Initializable {
     }
     
     /**
-     * 
-     * Método que limpia los campos de texto, se utiliza después del botón guardar
+     * Método que limpia los campos de texto, se manda a llamar después de que el usuario da clic
+     * en el botón "Guardar".
      */
     public void limpiarCampos() {
         gastoAgregar.setText("");
