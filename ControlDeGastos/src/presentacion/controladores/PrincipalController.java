@@ -9,6 +9,8 @@ import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -67,6 +69,13 @@ public class PrincipalController implements Initializable {
         fechaConsultar.valueProperty().addListener((ov, oldValue, newValue) -> {
             llenarTabla();
             granTotal.setText(gasto.sumarTotal(tablaGastos.getItems()));
+        });
+        
+        gastoAgregar.textProperty().addListener((ObservableValue<? extends String> observable, 
+            String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                gastoAgregar.setText(newValue.replaceAll("[^\\d]", ""));
+            }
         });
     }    
     
