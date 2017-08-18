@@ -67,7 +67,8 @@ public class PrincipalController implements Initializable {
         });
 
         Pattern patternDobles = Pattern.compile("\\d*|\\d+\\.\\d*");
-        TextFormatter formatoDoble = new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+        TextFormatter formatoDoble = new TextFormatter((UnaryOperator<TextFormatter.Change>) 
+            change -> {
             return patternDobles.matcher(change.getControlNewText()).matches() ? change : null;
         });
 
@@ -105,7 +106,8 @@ public class PrincipalController implements Initializable {
             if (gastoAgregar.getText().trim().isEmpty()) {
                 throw new NullPointerException();
             }
-            if (descripcionAgregar.getText().trim().isEmpty() || descripcionAgregar.getText().equalsIgnoreCase("'")) {
+            if (descripcionAgregar.getText().trim().isEmpty() || 
+                descripcionAgregar.getText().equalsIgnoreCase("'")) {
                 throw new NullPointerException();
             }
             if (fechaAgregar.getValue().isAfter(LocalDate.now())) {
