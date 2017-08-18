@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion.controladores;
 
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -20,6 +15,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logica.Gasto;
 import presentacion.Dialogo;
@@ -71,12 +67,12 @@ public class PrincipalController implements Initializable {
             granTotal.setText(gasto.sumarTotal(tablaGastos.getItems()));
         });
         
-        gastoAgregar.textProperty().addListener((ObservableValue<? extends String> observable, 
-            String oldValue, String newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                gastoAgregar.setText(newValue.replaceAll("[^\\d]", ""));
-            }
+        Pattern patternDobles = Pattern.compile("\\d*|\\d+\\.\\d*");
+        TextFormatter formatoDoble = new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+            return patternDobles.matcher(change.getControlNewText()).matches() ? change : null;
         });
+        
+        gastoAgregar.setTextFormatter(formatoDoble);
     }    
     
     private void llenarTabla() {
@@ -85,7 +81,11 @@ public class PrincipalController implements Initializable {
         columnaDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         Date fecha = Date.valueOf(fechaConsultar.getValue());
         try{
-            tablaGastos.setItems(gasto.consultarGasto(fecha));
+            if (gasto.consultarGasto(fecha) == null) {
+               dialogo.alertaError();
+            } else {
+                tablaGastos.setItems(gasto.consultarGasto(fecha));
+            }
         } catch(NullPointerException e) {
             dialogo.alertaError();
         }
@@ -111,9 +111,14 @@ public class PrincipalController implements Initializable {
             gasto.setDescripcion(descripcionAgregar.getText());
             gasto.setFecha(fechaSQL);
             
-            gasto.agregarGasto(gasto);
-            dialogo.alertaExito();
-            limpiarCampos();
+            boolean flag = gasto.agregarGasto(gasto);
+            
+            if (flag) {
+                dialogo.alertaExito();
+                limpiarCampos();
+            } else {
+                dialogo.alertaError();
+            }
         } catch (NullPointerException e) {
             dialogo.alertaCamposVacios();
         } catch (LinkageError ed) {

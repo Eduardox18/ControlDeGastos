@@ -1,8 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Nombre del programa: Control de Gastos
+ * Versión: 0.1
+ * Autores:
+ *          Domínguez Delgado Ángel Eduardo
+ *          Domínguez González José Andrés
+ * Fecha de inicio del desarrollo: 18 de Agosto de 2017
+ * Descripción: Programa que permite llevar el control de gastos de un usuario.
  */
+
 package presentacion;
 
 import java.io.IOException;
@@ -14,10 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author José Andrés Domínguez González
- */
+
 public class ControlDeGastos extends Application {
     
     private static BorderPane root = new BorderPane();
