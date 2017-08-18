@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logica.Gasto;
+import presentacion.Dialogo;
 
 /**
  * FXML Controller class
@@ -53,6 +54,8 @@ public class PrincipalController implements Initializable {
     @FXML
     private Button botonGuardar;
     
+    Dialogo dialogo = new Dialogo();
+    
     /**
      * Initializes the controller class.
      */
@@ -75,7 +78,7 @@ public class PrincipalController implements Initializable {
         try{
             tablaGastos.setItems(gasto.consultarGasto(fecha));
         } catch(NullPointerException e) {
-            //se va a lanzar diálogo
+            dialogo.alertaError();
         }
     }
     
@@ -98,13 +101,21 @@ public class PrincipalController implements Initializable {
             gasto.setGasto(Double.valueOf(gastoAgregar.getText()));
             gasto.setDescripcion(descripcionAgregar.getText());
             gasto.setFecha(fechaSQL);
-            boolean flag = gasto.agregarGasto(gasto);
-            System.out.println(flag);
+            
+            gasto.agregarGasto(gasto);
+            dialogo.alertaExito();
+            limpiarCampos();
         } catch (NullPointerException e) {
-            System.out.println("2");
+            dialogo.alertaCamposVacios();
         } catch (LinkageError ed) {
-            System.out.println("1");
+            dialogo.alertarFechaFutura();
         }
+    }
+    
+    public void limpiarCampos() {
+        gastoAgregar.setText("");
+        descripcionAgregar.setText("");
+        fechaAgregar.setValue(null);
     }
     
 }

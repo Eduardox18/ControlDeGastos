@@ -25,7 +25,7 @@ public class Dialogo {
         Alert alertaUsuario = new Alert(Alert.AlertType.WARNING);
         alertaUsuario.setTitle("Fecha erronea");
         alertaUsuario.setHeaderText("Alerta");
-        alertaUsuario.setContentText("La fecha ingresada aun no llega");
+        alertaUsuario.setContentText("La fecha ingresada aún no llega");
         alertaUsuario.showAndWait();
     }
     
@@ -34,7 +34,15 @@ public class Dialogo {
         alertaUsuario.setTitle("Error");
         alertaUsuario.setHeaderText("Error inesperado");
         alertaUsuario.setContentText("Ha ocurrido un error inesperado, consulte "
-            + "al programador del Sistema SIGA");
+            + "al programador del Sistema");
+        alertaUsuario.showAndWait();
+    }
+    
+    public void alertaExito() {
+        Alert alertaUsuario = new Alert(Alert.AlertType.INFORMATION);
+        alertaUsuario.setTitle("Éxito");
+        alertaUsuario.setHeaderText("Gasto guardado");
+        alertaUsuario.setContentText("Se ha guardado con éxito su gasto.");
         alertaUsuario.showAndWait();
     }
 }
