@@ -3,8 +3,8 @@ package datos;
 import java.sql.*;
 
 /**
- * Clase que permite hacer la conexión entre el programa y la base de datos del Control de Gastos. La base de
- * datos está almacenada en la herramienta mySQL.
+ * Clase que permite hacer la conexión entre el programa y la base de datos del Control de Gastos.
+ * La base de datos está almacenada en la herramienta mySQL.
  */
 public class Conexion {
 
