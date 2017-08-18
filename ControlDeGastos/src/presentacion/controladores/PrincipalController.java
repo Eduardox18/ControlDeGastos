@@ -41,11 +41,11 @@ public class PrincipalController implements Initializable {
     @FXML
     private TextField descripcionAgregar;
     @FXML
-    private TableView tablaGastos;
+    private TableView<Gasto> tablaGastos;
     @FXML
-    private TableColumn columnaGasto;
+    private TableColumn<Gasto, Double> columnaGasto;
     @FXML
-    private TableColumn columnaDescripcion;
+    private TableColumn<Gasto, String> columnaDescripcion;
     @FXML
     private Label etiquetaGranTotal;
     @FXML
@@ -58,20 +58,22 @@ public class PrincipalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Gasto gasto = new Gasto();
+        granTotal.setText("0.00");
+        
         fechaConsultar.valueProperty().addListener((ov, oldValue, newValue) -> {
             llenarTabla();
+            granTotal.setText(gasto.sumarTotal(tablaGastos.getItems()));
         });
     }    
     
     private void llenarTabla() {
         Gasto gasto = new Gasto();
         columnaGasto.setCellValueFactory(new PropertyValueFactory<>("gasto"));
-        columnaDescripcion.setCellFactory(new PropertyValueFactory<>("descripcion"));
-        
-        LocalDate fecha;
-        Date fechaSQL;
+        columnaDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        Date fecha = Date.valueOf(fechaConsultar.getValue());
         try{
-            //tablaGastos.setItems(gasto.consultarGasto(fechaConsultar.getValue()));
+            tablaGastos.setItems(gasto.consultarGasto(fecha));
         } catch(NullPointerException e) {
             //se va a lanzar diálogo
         }
